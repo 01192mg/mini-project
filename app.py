@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+from flask import Flask, render_template, request, jsonify, redirect, url_for
+from pymongo import MongoClient
+import requests
+=======
 from pymongo import MongoClient
 import jwt
 import datetime
@@ -5,11 +10,30 @@ import hashlib
 from flask import Flask, render_template, jsonify, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
+>>>>>>> 5d5c000955e68dded0380a1349ca967f06c67ce8
 
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.config['UPLOAD_FOLDER'] = "./static/profile_pics"
 
+<<<<<<< HEAD
+client = MongoClient('3.38.210.185', 27017, username="text", password="sparta")
+db = client.dbsparta
+
+
+@app.route('/')
+def home():
+    return render_template("mainpage.html")
+
+
+@app.route('/post', methods=['POST'])
+def save_post():
+    title_receive = title.form
+    definition_receive = request.form['definition_give']
+    doc = {'word': word_receive, 'definition': definition_receive}
+    db.word.insert_one(doc)
+    return jsonify({'result': 'success', 'msg': f'단어 {word_receive} 저장'})
+=======
 SECRET_KEY = 'SPARTA'
 
 client = MongoClient(
@@ -137,6 +161,7 @@ def update_like():
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
 
+>>>>>>> 5d5c000955e68dded0380a1349ca967f06c67ce8
 
 
 if __name__ == '__main__':
