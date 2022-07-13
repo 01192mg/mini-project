@@ -94,9 +94,8 @@ def sign_up():
     password_receive = request.form['password_give']
     password_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
     doc = {
-        "username": username_receive,  # 아이디
-        "password": password_hash,  # 비밀번호
-        "profile_pic_real": "profile_pics/profile_placeholder.png",  # 프로필 사진 기본 이미지
+        "username": username_receive,
+        "password": password_hash,
     }
     db.users.insert_one(doc)
     return jsonify({'result': 'success'})
@@ -119,7 +118,6 @@ def get_posts():
 
 @app.route("/post/<id>", methods=['GET'])
 def get_post(id):
-    print(id)
     post = db.posts.find_one({"_id": ObjectId(id)})
     post["_id"] = str(post["_id"])
     token_receive = request.cookies.get('mytoken')
@@ -136,6 +134,15 @@ def get_post(id):
 def delete_post(id):
     db.posts.delete_one({"_id": ObjectId(id)})
     return jsonify({'msg': '삭제 완료'})
+
+
+@app.route("/post/<id>", methods=['PATCH'])
+def update_post(id):
+    title = request.form['title_give']
+    description = request.form['description_give']
+    image = request.form['image_give']
+    db.posts.update_one({"_id": ObjectId(id)}, {'$set': {'title': title, 'description': description, 'image': image}})
+    return jsonify({'msg': '업데이트 완료'})
 
 
 if __name__ == '__main__':
