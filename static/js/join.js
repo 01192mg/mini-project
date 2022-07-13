@@ -51,7 +51,6 @@ function login_check() {
 
 function check_dupp() {
     let username = $("#input-id").val()
-    console.log(username)
     if (username == "") {
         $("#help-id").text("아이디를 입력해주세요.").removeClass("is-safe").addClass("is-danger")
         $("#input-id").focus()
