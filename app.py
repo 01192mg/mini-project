@@ -16,8 +16,6 @@ client = MongoClient('mongodb+srv://test:sparta@cluster0.qvb2j.mongodb.net/?retr
 db = client.dbsparta_plus_week4
 
 
-
-
 @app.route('/')
 def home():
     token_receive = request.cookies.get('mytoken')
@@ -30,8 +28,6 @@ def home():
     except jwt.exceptions.DecodeError:
         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
-
-<<<<<<< HEAD
 @app.route('/joinpage')
 def login_1():
     return render_template('joinpage.html')
@@ -41,8 +37,8 @@ def login_2():
     return render_template('loginpage.html')
 
 
-=======
->>>>>>> 932389a69e5d4f1e79ce18dba5488419eae19541
+
+
 @app.route('/post', methods=['POST'])
 def save_post():
     token_receive = request.cookies.get('mytoken')
@@ -65,12 +61,7 @@ def save_post():
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
 
-
-<<<<<<< HEAD
 @app.route('/login')
-=======
-@app.route('/login', methods=['GET'])
->>>>>>> 932389a69e5d4f1e79ce18dba5488419eae19541
 def login():
     msg = request.args.get("msg")
     return render_template('loginpage.html', msg=msg)

@@ -36,7 +36,7 @@ function login_check() {
     }
     $.ajax({
         type: "POST",
-        url: "/sign_up/save",
+        url: "/sign_up",
         data: {
             username_give: username,
             password_give: password
