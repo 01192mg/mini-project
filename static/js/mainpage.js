@@ -39,7 +39,7 @@ function in_modal(id) {
                     <div class="footer modal-footer">
                     <button type="button" class="btn_A btn btn-secondary" data-bs-dismiss="modal" id="edit_button" data-id="${id}"  
                     onclick="form_edit_post('${post['title']}, ${post['description']}, ${post['image']}')">수정하기</button>
-                        <button type="button" class="btn_A btn btn-primary" onclick="delete_post('${id}">삭제하기</button>
+                        <button type="button" class="btn_A btn btn-primary" onclick="delete_post('${id}')">삭제하기</button>
                     </div>
                 </div>
             </div>
