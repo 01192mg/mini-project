@@ -132,10 +132,8 @@ textarea {
     height: 400px;
 
     border: 0;
-    background-color: #eaeaea;
 }
 
-/*모달*/
 
 .modal-footer {
     justify-content: space-between;
