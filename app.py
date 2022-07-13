@@ -112,8 +112,22 @@ def get_posts():
 def get_post(id):
     post = db.posts.find_one({"_id": ObjectId(id)})
     post["_id"] = str(post["_id"])
-    return jsonify({'post': post})
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user = db.users.find_one({"username": payload["id"]}, {'_id': False})
+        print(user)
+        return jsonify({'post': post, 'user': user})
 
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return jsonify({'post': post})
+
+
+@app.route("/post/<id>", methods=['DELETE'])
+def delete_post(id):
+    db.posts.delete_one({"_id": ObjectId(id)})
+    return jsonify({'msg': '삭제 완료'})
+현
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

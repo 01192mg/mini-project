@@ -20,7 +20,25 @@ function in_modal(id) {
         data: {},
         success: function (response) {
             let post = response["post"]
-            let temp_html = `<div class="modal-header">
+            let username = response["user"]["username"];
+            let temp_html = ``
+            if (post["username"] == username) {
+                temp_html = `<div class="modal-header">
+                                            <h4 class="in_title" id="in_modaltitle">${post['title']}</h4>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                                    onclick="close_inmodal()"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img class="in_image" id="in_modalimage" src="${post['image']}" width="400px" height="400px">
+                                            <p class="in_text" id="in_modaltext">${post['description']}</p>
+                                        </div>
+                                            <button class="button"
+                                                   onclick="delete_post('${id}')">
+                                                    삭제하기<span class="icon is-small"><i class="fa fa-pencil"
+                                                    aria-hidden="true"></i></span>
+                                            </button>`;
+            } else {
+                temp_html = `<div class="modal-header">
                                             <h4 class="in_title" id="in_modaltitle">${post['title']}</h4>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                                                     onclick="close_inmodal()"></button>
@@ -29,8 +47,21 @@ function in_modal(id) {
                                             <img class="in_image" id="in_modalimage" src="${post['image']}" width="400px" height="400px">
                                             <p class="in_text" id="in_modaltext">${post['description']}</p>
                                         </div>`
+            }
             $('.modal-content').append(temp_html)
 
+        }
+    })
+}
+
+function delete_post(id) {
+    $.ajax({
+        type: 'DELETE',
+        url: `/post/${id}`,
+        data: {},
+        success: function (response) {
+            alert(response["msg"])
+            window.location.reload()
         }
     })
 }
