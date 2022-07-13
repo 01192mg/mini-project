@@ -1,20 +1,20 @@
 $(document).ready(function () {
-    listing();
-});
+    listing()
+})
 
 
 function open_box() {
-    $("#mymodal").show();
+    $("#mymodal").show()
+
 }
 
 function close_box() {
-    $("#mymodal").hide();
+    $("#mymodal").hide()
 
 }
 
 function in_modal(id) {
-    $("#myin_modal").show();
-    $(".modal-content").empty()
+     $("#myin_modal").show()
     $.ajax({
         type: 'GET',
         url: `/post/${id}`,
@@ -24,23 +24,29 @@ function in_modal(id) {
             let username = response["user"]["username"];
             let temp_html = ``
             if (post["username"] == username) {
-                temp_html = `<div class="modal-header">
-                                            <h4 class="in_title" id="in_modaltitle">${post['title']}</h4>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                temp_html = `<div class="modal" id="mymodal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
 
-                                                    onclick="close_post()"></button>
+                    <textarea name="title" class="u_title" id="u_title" rows="1" cols="55" placeholder="제목"
+                              maxlength="100"></textarea>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            onclick="close_box()"></button>
+                </div>
+                <div class="modal-body">
+                    <textarea name="content" id="u_content" rows="20" cols="60" placeholder="내용"
+                              maxlength="100"></textarea>
+                </div>
 
-                                        </div>
-                                        <div class="modal-body">
-                                            <img class="in_image" id="in_modalimage" src="${post['image']}" width="400px" height="400px">
-                                            <p class="in_text" id="in_modaltext">${post['description']}</p>
-                                        </div>
-                                            <button class="button"
-                                                   onclick="delete_post('${id}')">
-                                                    삭제하기<span class="icon is-small"><i class="fa fa-pencil"
-                                                    aria-hidden="true"></i></span>
-                                            </button>`;
-            } else {
+                <div class="modal-footer">
+                    <input name="image" type="url" id="img-url">
+                    <button type="button" class="btn btn-primary" onclick="save_post()">저장하기</button>
+                </div>
+            </div>
+        </div>
+    </div>`;
+            }else {
                 temp_html = `<div class="modal-header">
                                             <h4 class="in_title" id="in_modaltitle">${post['title']}</h4>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
@@ -53,7 +59,9 @@ function in_modal(id) {
                                             <p class="in_text" id="in_modaltext">${post['description']}</p>
                                         </div>`
             }
+
             $('.modal-content').append(temp_html)
+
 
 
         }
@@ -73,7 +81,8 @@ function delete_post(id) {
 }
 
 function close_post() {
-    $("#myin_modal").hide();
+    $("#myin_modal").hide()
+
 }
 
 
