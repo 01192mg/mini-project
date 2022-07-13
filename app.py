@@ -16,8 +16,6 @@ client = MongoClient('mongodb+srv://test:sparta@cluster0.qvb2j.mongodb.net/?retr
 db = client.dbsparta_plus_week4
 
 
-
-
 @app.route('/')
 def home():
     token_receive = request.cookies.get('mytoken')
@@ -31,7 +29,6 @@ def home():
         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
 
-
 @app.route('/joinpage')
 def login_1():
     return render_template('joinpage.html')
@@ -39,6 +36,9 @@ def login_1():
 @app.route('/loginpage')
 def login_2():
     return render_template('loginpage.html')
+
+
+
 
 @app.route('/post', methods=['POST'])
 def save_post():
