@@ -12,10 +12,11 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.config['UPLOAD_FOLDER'] = "./static/profile_pics"
 
 SECRET_KEY = 'SPARTA'
-# client = MongoClient('3.38.210.185', 27017, username="text", password="sparta")
-# db = client.dbsparta
+
 client = MongoClient('mongodb+srv://test:sparta@cluster0.qvb2j.mongodb.net/?retryWrites=true&w=majority')
 db = client.dbsparta_plus_week4
+
+
 
 
 @app.route('/')
@@ -30,6 +31,13 @@ def home():
         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
 
+@app.route('/joinpage')
+def login_1():
+    return render_template('joinpage.html')
+
+@app.route('/loginpage')
+def login_2():
+    return render_template('loginpage.html')
 
 
 @app.route('/post', methods=['POST'])
@@ -55,11 +63,10 @@ def save_post():
         return redirect(url_for("home"))
 
 
-
 @app.route('/login')
 def login():
     msg = request.args.get("msg")
-    return render_template('login.html', msg=msg)
+    return render_template('loginpage.html', msg=msg)
 
 
 @app.route('/user/<username>')
@@ -116,7 +123,7 @@ def sign_up():
 
 
 @app.route('/sign_up/check_dup', methods=['POST'])
-def check_dup():
+def check_dupp():
     username_receive = request.form['username_give']
     exists = bool(db.users.find_one({"username": username_receive}))
     return jsonify({'result': 'success', 'exists': exists})

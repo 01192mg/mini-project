@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+    <!-- Webpage Title -->
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Font Awesome CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+    <link rel="stylesheet" href="../static/css/login.css">
+
+    <title>니 옷이 부럽지가 않아</title>
+
+</head>
+
+<body>
+<div class="container">
+    <div class="l_imgbox"></div>
+
+    <div class="l_menu">
+        <div class="loginbar">
+            <img class="loginbar_img" src="../static/img/표정.svg">
+
+            <div class="input_bar">
+                <input type="email" class="login_id" id="input-id" placeholder="아이디">
+
+
+                <input type="password" class="login_ps" id="input-password" placeholder="비밀번호">
+
+                <button class="btn_login" onclick="login()">로그인</button>
+            </div>
+        </div>
+
+
+        <div class="joinbar">
+            <div class="join">
+                <p>계정이 없으신가요?</p>
+                <button class="btn_join" onclick="window.location.href='/joinpage'">가입하기</button>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<script type="text/javascript" src="../static/js/loginpage.js"></script>
+</body>
+</html>

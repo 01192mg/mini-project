@@ -84,9 +84,9 @@ function listing() {
 
 
 function logout() {
-    ('mytoken').remove;
+    $.removeCookie('mytoken', {path: '/'});
     alert('로그아웃!')
-    window.location.href = '/login'
+    window.location.href = '/'
 }
 
 
