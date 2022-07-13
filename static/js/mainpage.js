@@ -16,7 +16,7 @@ function in_modal(id) {
     $(".modal-content").empty()
     $.ajax({
         type: 'GET',
-        url: `/get_post/${id}`,
+        url: `/post/${id}`,
         data: {},
         success: function (response) {
             let post = response["post"]
@@ -63,7 +63,7 @@ function save_post() {
 function listing() {
     $.ajax({
         type: 'GET',
-        url: `/get_posts`,
+        url: `/posts`,
         data: {},
         success: function (response) {
             console.log(response)
@@ -88,6 +88,5 @@ function logout() {
     alert('로그아웃!')
     window.location.href = '/'
 }
-
 
 
