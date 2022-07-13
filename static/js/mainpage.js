@@ -71,19 +71,22 @@ function listing() {
             for (let i = 0; i < rows.length; i++) {
                 let username = rows[i]['username']
                 let image = rows[i]['image']
+
                 let id = rows[i]['_id']
                 let temp_html = `<div class="card-list">
                                     <h5 class="name">${username}</h5>
-                                    <button type="button" class="list" onclick="in_modal('${id}')"><img src='${image}'width="400" height="400"></button>
-                                </div>`
+                                    <button type="button" class="list" onclick="in_modal('${id}')"><img src='${image}'width="400" height="400"></button>                                </div>`
                 $('.cards-box').append(temp_html)
             }
         }
     })
 }
 
-function sign_out() {
+
+function logout() {
     $.removeCookie('mytoken', {path: '/'});
     alert('로그아웃!')
-    window.location.href = "/login"
+    window.location.href = '/'
 }
+
+
