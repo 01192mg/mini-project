@@ -11,8 +11,32 @@ function close_box() {
     $("#mymodal").hide();
 }
 
-function in_modal() {
+function in_modal(id) {
     $("#myin_modal").show();
+    $(".modal-content").empty()
+    $.ajax({
+        type: 'GET',
+        url: `/get_post/${id}`,
+        data: {},
+        success: function (response) {
+            let post = response["post"]
+            let temp_html = `<div class="modal-header">
+                                            <h4 class="in_title" id="in_modaltitle">${post['title']}</h4>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                                    onclick="close_inmodal()"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img class="in_image" id="in_modalimage" src="${post['image']}" width="400px" height="400px">
+                                            <p class="in_text" id="in_modaltext">${post['description']}</p>
+                                        </div>`
+            $('.modal-content').append(temp_html)
+
+        }
+    })
+}
+
+function close_inmodal() {
+    $("#myin_modal").hide();
 }
 
 
@@ -47,10 +71,11 @@ function listing() {
             for (let i = 0; i < rows.length; i++) {
                 let username = rows[i]['username']
                 let image = rows[i]['image']
+
+                let id = rows[i]['_id']
                 let temp_html = `<div class="card-list">
                                     <h5 class="name">${username}</h5>
-                                    <button type="button" class="list" onclick="in_modal()"><img src='${image}'width="400" height="400"></button>
-                                </div>`
+                                    <button type="button" class="list" onclick="in_modal('${id}')"><img src='${image}'width="400" height="400"></button>                                </div>`
                 $('.cards-box').append(temp_html)
             }
         }
@@ -59,9 +84,9 @@ function listing() {
 
 
 function logout() {
-    ('mytoken').remove;
+    $.removeCookie('mytoken', {path: '/'});
     alert('로그아웃!')
-    window.location.href = '/login'
+    window.location.href = '/'
 }
 
 

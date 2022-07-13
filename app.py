@@ -1,3 +1,4 @@
+from bson import ObjectId
 from pymongo import MongoClient
 import jwt
 import datetime
@@ -13,6 +14,7 @@ app.config['UPLOAD_FOLDER'] = "./static/profile_pics"
 SECRET_KEY = 'SPARTA'
 # client = MongoClient('3.38.210.185', 27017, username="text", password="sparta")
 # db = client.dbsparta
+
 client = MongoClient('mongodb+srv://yongwook:Dnr4fkdgo@cluster0.yb6vivj.mongodb.net/Cluster0?retryWrites=true&w=majority')
 db = client.dbsparta_plus_week4
 
@@ -145,8 +147,18 @@ def posting():
 
 @app.route("/get_posts", methods=['GET'])
 def get_posts():
-    posts = list(db.posts.find({}, {'_id': False}))
-    return jsonify({'posts':posts})
+    posts = list(db.posts.find({}))
+    for post in posts:
+        post["_id"] = str(post["_id"])
+    return jsonify({'posts': posts})
+
+
+@app.route("/get_post/<id>", methods=['GET'])
+def get_post(id):
+    post = db.posts.find_one({"_id": ObjectId(id)})
+    post["_id"] = str(post["_id"])
+    return jsonify({'post': post})
+
 
 
 @app.route('/update_like', methods=['POST'])
