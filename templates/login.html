@@ -27,7 +27,7 @@
             let password = $("#input-password").val()
 
             if (username == "") {
-                $("#help-id-login").text("아이디를 입력해주세요.")
+                $("#help-id-login").text("아이디를 입력해주세요.").removeClass("is-safe").addClass("is-danger")
                 $("#input-username").focus()
                 return;
             } else {

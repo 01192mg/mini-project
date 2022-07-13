@@ -18,7 +18,6 @@
 
     <title>니 옷이 부럽지가 않아</title>
 
-
     <style>
 
     </style>
@@ -31,7 +30,7 @@
         <div class="btn-div">
             <button class="btn" id="logo" onclick="window.location.href='/'"></button>
             <button class="btn" id="my_info" onclick="window.location.href='/'"><p class="menu-bar">내 정보</p></button>
-            <button class="btn" id="log-out" onclick="window.location.href='/'"><p class="menu-bar">로그 아웃</p></button>
+            <button class="btn" id="log-out" onclick="logout()"><p class="menu-bar">로그 아웃</p></button>
         </div>
     </div>
 
@@ -39,47 +38,52 @@
         <div class="title-box">
             <img src="/static/img/메인%20이미지.svg" class="main-img">
             <h3 class="text-title">나만의 코디를 자랑해보세요<img src='/static/img/느낌표.svg'></h3>
-            <button type="button" class="btn btn-primary btn-lg" id="btn-create" style="font-weight: lighter" onclick="open_box()">작성하기
+            <button type="button" class="btn btn-primary btn-lg" id="btn-create" style="font-weight: lighter"
+                    onclick="open_box()">작성하기
             </button>
         </div>
 
         <div class="cards-box">
-            <div class="card-list">
-                <h5 class="name">name</h5>
-                <button type="button" class="list" onclick=""><img src=''></button>
-            </div>
-
-            <div class="card-list">
-                <h5 class="name">name</h5>
-                <button type="button" class="list" onclick=""><img src=''></button>
-            </div>
-
-            <div class="card-list">
-                <h5 class="name">name</h5>
-                <button type="button" class="list" onclick=""><img src=''></button>
-            </div>
         </div>
     </div>
 
     <div class="modal" id="mymodal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <textarea name="title" class="u_title" id="utitle" rows="1" cols="55" placeholder="제목" maxlength="100"></textarea>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="close_box()"></button>
-                    </div>
-                    <div class="modal-body">
-                        <textarea name="content" id="ucontent" rows="20" cols="60" placeholder="내용" maxlength="100"></textarea>
-                    </div>
-                    <div class="modal-footer">
-                        <input class="u_file" type="file" name="selectfile">
-                        <button type="button" class="btn btn-primary">작성하기</button>
-                    </div>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <textarea name="title" class="u_title" id="u_title" rows="1" cols="55" placeholder="제목"
+                              maxlength="100"></textarea>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            onclick="close_box()"></button>
+                </div>
+                <div class="modal-body">
+                    <textarea name="content" id="u_content" rows="20" cols="60" placeholder="내용"
+                              maxlength="100"></textarea>
+                </div>
+
+                <div class="modal-footer">
+                    <input name="image" type="url" id="img-url">
+                    <button type="button" class="btn btn-primary" onclick="save_post()">저장하기</button>
                 </div>
             </div>
         </div>
+    </div>
 
+    <div class="in_modal" id="myin_modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p></p>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            onclick="close_box()"></button>
+                </div>
+                <div class="modal-body">
+                    <p></p>
+                </div>
 
+            </div>
+        </div>
     </div>
 
 </div>
