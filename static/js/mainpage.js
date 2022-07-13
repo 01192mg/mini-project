@@ -3,7 +3,8 @@ $(document).ready(function () {
 });
 
 function open_edit_box() {
-    $("#myin_modal").modal('hide')
+    console.log("start open_edit_box")
+    $("#myin_modal").modal('hide');
     $('#editmodal').modal('show')
 }
 
@@ -27,23 +28,19 @@ function in_modal(id) {
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="in_title" id="in_modaltitle">${post['title']}</h4>
+                        <h3 class="in_title" id="in_modaltitle">${post['title']}</h3>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <img class="in_image" id="in_modalimage" src="${post['image']}" width="400px" height="400px">
                         <p class="in_text" id="in_modaltext">${post['description']}</p>
                     </div>
-                        <button class="button" id="edit_button" data-id="${id}"
-                               onclick="form_edit_post('${post['title']}, ${post['description']}, ${post['image']}')">
-                                수정하기<span class="icon is-small"><i class="fa fa-pencil"
-                                aria-hidden="true"></i></span>
-                        </button>
-                        <button class="button"
-                               onclick="delete_post('${id}')">
-                                삭제하기<span class="icon is-small"><i class="fa fa-pencil"
-                                aria-hidden="true"></i></span>
-                        </button>
+                    
+                    <div class="footer modal-footer">
+                    <button type="button" class="btn_A btn btn-secondary" data-bs-dismiss="modal" id="edit_button" data-id="${id}"  
+                    onclick="form_edit_post('${post['title']}, ${post['description']}, ${post['image']}')">수정하기</button>
+                        <button type="button" class="btn_A btn btn-primary" onclick="delete_post('${id}">삭제하기</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -91,7 +88,7 @@ function edit_post() {
     $.ajax({
         type: 'PATCH',
         url: `/post/${id}`,
-        data: {'title_give':title, 'description_give':description, 'image_give':image},
+        data: {'title_give': title, 'description_give': description, 'image_give': image},
         success: function (response) {
             alert(response["msg"])
             window.location.reload()
@@ -140,6 +137,7 @@ function listing() {
         url: `/posts`,
         data: {},
         success: function (response) {
+            console.log(response)
             let rows = response['posts']
             for (let i = 0; i < rows.length; i++) {
                 let username = rows[i]['username']
@@ -148,7 +146,7 @@ function listing() {
                 let id = rows[i]['_id']
                 let temp_html = `<div class="card-list">
                                     <h5 class="name">${username}</h5>
-                                    <button type="button" class="list" onclick="in_modal('${id}')"><img src='${image}'width="400" height="400"></button>                                </div>`
+                                    <button type="button" class="list" onclick="in_modal('${id}')"><img class="mo" src='${image}'width="400" height="400"></button>                                </div>`
                 $('.cards-box').append(temp_html)
             }
         }
