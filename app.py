@@ -49,12 +49,14 @@ def save_post():
         title_receive = request.form["title_give"]
         description_receive = request.form["description_give"]
         image_receive = request.form["image_give"]
+        date_receive = request.form["date_give"]
 
         doc = {
             "username": user_info["username"],
             "title": title_receive,
             "description": description_receive,
-            "image": image_receive
+            "image": image_receive,
+            "date": date_receive
         }
         db.posts.insert_one(doc)
         return jsonify({"result": "success", 'msg': '작성 완료'})
@@ -111,7 +113,7 @@ def check_dupp():
 
 @app.route("/posts", methods=['GET'])
 def get_posts():
-    posts = list(db.posts.find({}))
+    posts = list(db.posts.find({}).sort("date", -1))
     for post in posts:
         post["_id"] = str(post["_id"])
     return jsonify({'posts': posts})

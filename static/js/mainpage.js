@@ -77,6 +77,7 @@ function save_post() {
     let title = $('#u_title').val()
     let description = $('#u_content').val()
     let image = $('#img-url').val()
+    let today = new Date().toISOString()
 
     $.ajax({
         type: "POST",
@@ -84,7 +85,8 @@ function save_post() {
         data: {
             title_give: title,
             description_give: description,
-            image_give: image
+            image_give: image,
+            date_give: today
         },
         success: function (response) {
             alert(response["msg"])
