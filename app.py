@@ -116,7 +116,6 @@ def get_post(id):
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user = db.users.find_one({"username": payload["id"]}, {'_id': False})
-        print(user)
         return jsonify({'post': post, 'user': user})
 
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
