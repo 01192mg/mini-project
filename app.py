@@ -31,7 +31,7 @@ def home():
         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
 
-<<<<<<< HEAD
+
 @app.route('/joinpage')
 def login_1():
     return render_template('joinpage.html')
@@ -40,9 +40,6 @@ def login_1():
 def login_2():
     return render_template('loginpage.html')
 
-
-=======
->>>>>>> 932389a69e5d4f1e79ce18dba5488419eae19541
 @app.route('/post', methods=['POST'])
 def save_post():
     token_receive = request.cookies.get('mytoken')
@@ -66,17 +63,14 @@ def save_post():
         return redirect(url_for("home"))
 
 
-<<<<<<< HEAD
-@app.route('/login')
-=======
 @app.route('/login', methods=['GET'])
->>>>>>> 932389a69e5d4f1e79ce18dba5488419eae19541
+
 def login():
     msg = request.args.get("msg")
     return render_template('loginpage.html', msg=msg)
 
 
-@app.route('/login', methods=['POST'])
+@app.route('/sign_in', methods=['POST'])
 def sign_in():
     username_receive = request.form['username_give']
     password_receive = request.form['password_give']
@@ -97,7 +91,7 @@ def sign_in():
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
 
 
-@app.route('/sign_up', methods=['POST'])
+@app.route('/sign_up/save', methods=['POST'])
 def sign_up():
     username_receive = request.form['username_give']
     password_receive = request.form['password_give']
@@ -109,6 +103,7 @@ def sign_up():
     }
     db.users.insert_one(doc)
     return jsonify({'result': 'success'})
+
 
 
 @app.route('/sign_up/check_dup', methods=['POST'])

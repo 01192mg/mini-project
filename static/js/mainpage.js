@@ -9,6 +9,7 @@ function open_box() {
 
 function close_box() {
     $("#mymodal").hide();
+    window.location.reload()
 }
 
 function in_modal(id) {
@@ -26,7 +27,7 @@ function in_modal(id) {
                 temp_html = `<div class="modal-header">
                                             <h4 class="in_title" id="in_modaltitle">${post['title']}</h4>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                                                    onclick="close_inmodal()"></button>
+                                                    onclick="close_box()"></button>
                                         </div>
                                         <div class="modal-body">
                                             <img class="in_image" id="in_modalimage" src="${post['image']}" width="400px" height="400px">
@@ -41,7 +42,7 @@ function in_modal(id) {
                 temp_html = `<div class="modal-header">
                                             <h4 class="in_title" id="in_modaltitle">${post['title']}</h4>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                                                    onclick="close_inmodal()"></button>
+                                                    onclick="close_box()"></button>
                                         </div>
                                         <div class="modal-body">
                                             <img class="in_image" id="in_modalimage" src="${post['image']}" width="400px" height="400px">
@@ -49,6 +50,7 @@ function in_modal(id) {
                                         </div>`
             }
             $('.modal-content').append(temp_html)
+
 
         }
     })
