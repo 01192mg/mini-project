@@ -31,23 +31,19 @@ function in_modal(id) {
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="in_title" id="in_modaltitle">${post['title']}</h4>
+                        <h3 class="in_title" id="in_modaltitle">${post['title']}</h3>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <img class="in_image" id="in_modalimage" src="${post['image']}" width="400px" height="400px">
                         <p class="in_text" id="in_modaltext">${post['description']}</p>
                     </div>
-                        <button class="button"
-                               onclick="form_edit_post('${post['title']}, ${post['description']}, ${post['image']}')">
-                                수정하기<span class="icon is-small"><i class="fa fa-pencil"
-                                aria-hidden="true"></i></span>
-                        </button>
-                        <button class="button"
-                               onclick="delete_post('${id}')">
-                                삭제하기<span class="icon is-small"><i class="fa fa-pencil"
-                                aria-hidden="true"></i></span>
-                        </button>
+                    
+                    <div class="footer modal-footer">
+                    <button type="button" class="btn_A btn btn-secondary" data-bs-dismiss="modal" id="edit_button" data-id="${id}"  
+                    onclick="form_edit_post('${post['title']}, ${post['description']}, ${post['image']}')">수정하기</button>
+                        <button type="button" class="btn_A btn btn-primary" onclick="delete_post('${id}')">삭제하기</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -75,15 +71,33 @@ function in_modal(id) {
     })
 }
 
-function form_edit_post(title, description, image) {
-    document.getElementById("edit_title").value = title;
-    document.getElementById("edit_content").value = description;
-    document.getElementById("edit_img_url").value = image;
+function form_edit_post(object) {
+    let post = object.split(', ')
+    let title = post[0]
+    let description = post[1]
+    let image = post[2]
+
+    document.getElementById("edit_title").value = title
+    document.getElementById("edit_content").value = description
+    document.getElementById("edit_img_url").value = image
     open_edit_box();
 }
 
-function edit_post(post) {
-
+function edit_post() {
+    let title = $('#edit_title').val();
+    let description = $('#edit_content').val();
+    let image = $('#edit_img_url').val();
+    let edit_button = document.getElementById('edit_button')
+    let id = edit_button.dataset.id;
+    $.ajax({
+        type: 'PATCH',
+        url: `/post/${id}`,
+        data: {'title_give': title, 'description_give': description, 'image_give': image},
+        success: function (response) {
+            alert(response["msg"])
+            window.location.reload()
+        }
+    })
 }
 
 function delete_post(id) {
@@ -136,7 +150,7 @@ function listing() {
                 let id = rows[i]['_id']
                 let temp_html = `<div class="card-list">
                                     <h5 class="name">${username}</h5>
-                                    <button type="button" class="list" onclick="in_modal('${id}')"><img src='${image}'width="400" height="400"></button>                                </div>`
+                                    <button type="button" class="list" onclick="in_modal('${id}')"><img class="mo" src='${image}'width="400" height="400"></button>                                </div>`
                 $('.cards-box').append(temp_html)
             }
         }
