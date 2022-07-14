@@ -38,8 +38,6 @@ def login_2():
     return render_template('loginpage.html')
 
 
-
-
 @app.route('/post', methods=['POST'])
 def save_post():
     token_receive = request.cookies.get('mytoken')
@@ -125,6 +123,7 @@ def get_posts():
 
 @app.route("/post/<id>", methods=['GET'])
 def get_post(id):
+    print(id)
     post = db.posts.find_one({"_id": ObjectId(id)})
     post["_id"] = str(post["_id"])
     token_receive = request.cookies.get('mytoken')
