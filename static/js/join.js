@@ -24,15 +24,15 @@ function login_check() {
         $("#help-password").text("사용할 수 있는 비밀번호입니다.").removeClass("is-danger").addClass("is-success")
     }
     if (password2 == "") {
-        $("#help-password2").text("비밀번호를 입력해주세요.").removeClass("is-safe").addClass("is-danger")
+        $("#help-password").text("비밀번호를 입력해주세요.").removeClass("is-safe").addClass("is-danger")
         $("#input-password2").focus()
         return;
     } else if (password2 != password) {
-        $("#help-password2").text("비밀번호가 일치하지 않습니다.").removeClass("is-safe").addClass("is-danger")
+        $("#help-password").text("비밀번호가 일치하지 않습니다.").removeClass("is-safe").addClass("is-danger")
         $("#input-password2").focus()
         return;
     } else {
-        $("#help-password2").text("비밀번호가 일치합니다.").removeClass("is-danger").addClass("is-success")
+        $("#help-password").text("비밀번호가 일치합니다.").removeClass("is-danger").addClass("is-success")
     }
     $.ajax({
         type: "POST",
