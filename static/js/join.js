@@ -19,7 +19,7 @@ function login_check() {
     } else if (!is_password(password)) {
         $("#help-password").text("비밀번호의 형식을 확인해주세요. 영문과 숫자 필수 포함, 특수문자(!@#$%^&*) 사용가능 8-20자").removeClass("is-safe").addClass("is-danger")
         $("#input-password").focus()
-        return
+        return;
     } else {
         $("#help-password").text("사용할 수 있는 비밀번호입니다.").removeClass("is-danger").addClass("is-success")
     }
